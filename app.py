@@ -13,12 +13,12 @@ class Incoming(db.Model):
     website = db.Column(db.String(20))
     type = db.Column(db.String(20))
 
-    def __init__(self, name):
-        self.name = website
+    def __init__(self, website):
+        self.website = website
 
     def serialize(self):
         return {"id": self.id,
-                "name": self.name}
+                "website": self.website}
 
 ## hello oleg
 
