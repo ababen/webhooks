@@ -9,6 +9,7 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
     SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'Webhook')
 
+
 class ProductionConfig(Config):
     DEBUG = False
 
@@ -21,7 +22,7 @@ class StagingConfig(Config):
 class DevelopmentConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
-    #SQLALCHEMY_DATABASE_URI = "postgres://webapi_user:abc123@localhost:5432/webapi"
+    SQLALCHEMY_DATABASE_URI = DATABASE_URL="postgres://webapi_user:abc123@webapi:5432/webapi"
 
 class TestingConfig(Config):
     TESTING = True

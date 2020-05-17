@@ -7,26 +7,17 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from sqlalchemy.dialects.postgresql import JSON
 
+from models import Webhook
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
-#app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 api = Api(app)
-db = SQLAlchemy(app)
 
 print(os.environ['APP_SETTINGS'])
-
-class Webhook(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    website = db.Column(db.String(255))
-    payload = db.Column(JSON)
-
-    def __repr__(self):
-        return '<Website %s>' % self.website
-
+print(os.environ['DATABASE_URL'])
 
 class WebhoookSchema(ma.Schema):
     class Meta:
