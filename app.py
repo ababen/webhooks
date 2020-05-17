@@ -1,20 +1,19 @@
 import os
 
 from flask import Flask, request, url_for
-#from flask_api import FlaskAPI, status, exceptions
 from flask_restful import Api, Resource
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
-from sqlalchemy.dialects.postgresql import JSON
-
-from models import Webhook
 
 app = Flask(__name__)
-app.config.from_pyfile('config.py')
+#app.config.from_pyfile('config.py')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 api = Api(app)
+
+from models import Webhook
 
 print(os.environ['APP_SETTINGS'])
 print(os.environ['DATABASE_URL'])
