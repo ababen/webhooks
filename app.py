@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, request, url_for
 #from flask_api import FlaskAPI, status, exceptions
 from flask_restful import Api, Resource
@@ -6,6 +8,7 @@ from flask_marshmallow import Marshmallow
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
+#app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
