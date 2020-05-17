@@ -5,6 +5,8 @@ from flask import Flask, request, url_for
 from flask_restful import Api, Resource
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+from sqlalchemy.dialects.postgresql import JSON
+
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -16,11 +18,12 @@ api = Api(app)
 db = SQLAlchemy(app)
 # migrate = Migrate(app, db)
 
+print(os.environ['APP_SETTINGS'])
 
 class Webhook(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     website = db.Column(db.String(255))
-    payload = db.Column(db.Text)
+    payload = db.Column(JSON)
 
     def __repr__(self):
         return '<Website %s>' % self.website
