@@ -16,7 +16,6 @@ db = SQLAlchemy(app)
 ma = Marshmallow(app)
 api = Api(app)
 db = SQLAlchemy(app)
-# migrate = Migrate(app, db)
 
 print(os.environ['APP_SETTINGS'])
 
@@ -52,72 +51,6 @@ class WebhookListResoource(Resource):
         return webhook_schema.dump(new_webhook)
 
 api.add_resource(WebhookListResoource, '/webhooks')
-"""
-notes = {
-    0: 'do the shopping',
-    1: 'build the codez',
-    2: 'paint the door',
-}
 
-def note_repr(key):
-    return {
-        'url': request.host_url.rstrip('/') + url_for('notes_detail', key=key),
-        'text': notes[key]
-    }
-
-
-@app.route('/', methods=['GET'])
-def index():
-    #return jsonify({'incoming': list(map(lambda dev: dev.serialize(), Incoming.query.all()))})
-    return {'hello': 'world'}
-
-
-@app.route('/', methods=['POST'])
-def add_webhook():
-    web = requests()
-    print(web)
-    return "Okay"
-
-@app.route('/webhooks/', methods=['POST'])
-def add_webhook():
-    if not request.json or not 'website' in request.json:
-        abort(400)
-        web = request.json()
-        #web = Incoming(request.json['website'])
-        #db.session.add(web)
-        #db.session.commit()
-        #return jsonify({'incomding': web.serializa()}), 201
-        print(web)
-        return web
-
-@app.route("/", methods=['GET', 'POST'])
-def notes_list():
-
-    if request.method == 'POST':
-        note = str(request.data.get('text', ''))
-        idx = max(notes.keys()) + 1
-        notes[idx] = note
-        return note_repr(idx), status.HTTP_201_CREATED
-
-    # request.method == 'GET'
-    return [note_repr(idx) for idx in sorted(notes.keys())]
-
-
-@app.route("/<int:key>/", methods=['GET', 'PUT', 'DELETE'])
-def notes_detail(key):
-    if request.method == 'PUT':
-        note = str(request.data.get('text', ''))
-        notes[key] = note
-        return note_repr(key)
-
-    elif request.method == 'DELETE':
-        notes.pop(key, None)
-        return '', status.HTTP_204_NO_CONTENT
-
-    # request.method == 'GET'
-    if key not in notes:
-        raise exceptions.NotFound()
-    return note_repr(key)
-"""
 if __name__ == "__main__":
     app.run(debug=True)

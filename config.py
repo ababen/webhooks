@@ -6,7 +6,6 @@ class Config(object):
     TESTING = False
     CSRF_ENABLED = True
     #SECRET_KEY = 'this-really-needs-to-be-changed'
-    #SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.sqlite')
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
     SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'Webhook')
 
@@ -22,7 +21,7 @@ class StagingConfig(Config):
 class DevelopmentConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
-
+    #SQLALCHEMY_DATABASE_URI = "postgres://webapi_user:abc123@localhost:5432/webapi"
 
 class TestingConfig(Config):
     TESTING = True
